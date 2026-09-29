@@ -1,26 +1,40 @@
 @import "tailwindcss";
 
+/* Tokens: docs-mooda/technical/frontend/fe-mooda-customer/stitch/…/mooda_editorial_marketplace/DESIGN.md */
+@theme {
+  --color-primary: #09090b;
+  --color-on-primary: #ffffff;
+  --color-secondary: #e11d48;
+  --color-secondary-glaze: #fff1f2;
+  --color-tertiary: #2563eb;
+  --color-neutral: #18181b;
+  --color-canvas: #ffffff;
+  --color-sand: #f9f8f6;
+  --color-border-subtle: #e4e4e7;
+  --color-muted: #71717a;
+  --color-ghost: #f4f4f5;
+  --color-gold: #d97706;
+  --color-trust: #059669;
+  --color-trust-glaze: #ecfdf5;
+  --color-error: #ba1a1a;
+
+  --font-display: var(--font-jakarta), system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  --shadow-card: 0 2px 4px rgba(9, 9, 11, 0.02), 0 6px 12px rgba(9, 9, 11, 0.04);
+  --shadow-float: 0 12px 24px -4px rgba(9, 9, 11, 0.08), 0 4px 8px -2px rgba(9, 9, 11, 0.03);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-sand);
+  color: var(--color-primary);
+  font-family: var(--font-sans);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
 }

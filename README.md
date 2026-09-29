@@ -23,8 +23,21 @@ Fərziyyə, uğur meyarı (test başlamazdan **əvvəl**), nəticə və qərar
 
 | ID | Fərziyyə | Səhifə |
 | --- | --- | --- |
-| MVT-1 | Müştəri qapıda ödəniş olmadan kartla alar | — |
+| MVT-1 | Müştəri qapıda ödəniş olmadan kartla alar | `/`, `/p/[id]`, `/checkout` |
 | MVT-3 | Hansı dəyər təklifi (çeşid / qaytarma / sürət) cəlb edir | — |
+
+## MVT-1 necə işləyir
+
+- Reklam linki: `/?lang=az|ru&v=t|p&utm_source=…`. `v=t` etibar elementlərini
+  (VÖEN, qaytarma, butik adı) göstərir, `v=p` göstərmir; verilməyibsə 50/50.
+- Checkout-da iki seçim: «Kartla indi ödə» və «Qapıda ödə». Qapıda ödəniş
+  seçilərsə, «hələ aktiv deyil» dialoqu çıxır: karta keçid (`cod_to_card`)
+  və ya imtina + səbəb (`cod_declined`) ölçülür.
+- Sifariş `SHEETS_WEBHOOK_URL` (bax `apps-script/Code.gs`) və/və ya Telegram-a
+  gedir; eventlər Sheets-in `events` vərəqinə. Env: `.env.example`.
+- Məhsullar `src/lib/products.ts`-dədir; şəkillər Stitch maketindən
+  nümunədir — testdən əvvəl real butik məhsulları ilə əvəzlənir.
+- Dizayn: `docs-mooda/…/stitch/…/mooda_editorial_marketplace/DESIGN.md`.
 
 ## İşə salma
 

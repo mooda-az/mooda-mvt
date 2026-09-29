@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# mooda-mvt
 
-## Getting Started
+Mooda üçün Minimum Viable Test (MVT) səhifələri: landing, fake checkout və
+reklam variantları. **Atılacaq kod** — məhsul deyil.
 
-First, run the development server:
+## Qaydalar
+
+- Bu depo `fe-mooda-*` / `be-mooda-*` qaydalarına tabe deyil: hexagonal
+  arxitektura, persisted query, codegen, tam test matrisi tələb olunmur.
+- Heç bir kod buradan məhsul depolarına köçürülmür. Test qalib gələrsə,
+  funksiya məhsulda öz qaydaları ilə yenidən yazılır.
+- Backend və verilənlər bazası yoxdur. Sifariş/qeydiyyat məlumatı xarici
+  alətə (Sheets / Airtable / Telegram) gedir; icra concierge ilə, əl ilə.
+- Real ödəniş yalnız lisenziyalı bank/PSP ödəniş linki ilə. Kartdan-karta
+  köçürmə qəbul edilmir (`DEC-2026-004`).
+- Çek və qaimə satıcı butikdən olur, Mooda adından yox.
+
+## Fərziyyələr və nəticələr
+
+Fərziyyə, uğur meyarı (test başlamazdan **əvvəl**), nəticə və qərar
+`docs-mooda`-da saxlanılır, burada yox. Əlaqəli: `OPEN-014`, `OPEN-004`,
+`RISK-017`, `RISK-019`.
+
+| ID | Fərziyyə | Səhifə |
+| --- | --- | --- |
+| MVT-1 | Müştəri qapıda ödəniş olmadan kartla alar | — |
+| MVT-3 | Hansı dəyər təklifi (çeşid / qaytarma / sürət) cəlb edir | — |
+
+## İşə salma
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Ömür
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Başlanğıc: 2026-09-29. Planlanan arxivləmə: 2026-11-30 — testlər bitəndə
+depo arxivlənir.

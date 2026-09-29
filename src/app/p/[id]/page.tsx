@@ -21,15 +21,15 @@ export default async function ProductPage({ params }: PageProps<"/p/[id]">) {
     <>
       <TrackView name="product_view" productId={product.id} />
       <SiteHeader lang={lang} />
-      <main id="main-content" className="mx-auto w-full max-w-[1440px] flex-1 px-4 py-6 md:px-8 md:py-10">
-        <Link href="/#kolleksiya" className="text-sm text-muted hover:text-primary">
+      <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[1440px] scroll-mt-28 flex-1 px-5 py-5 sm:px-6 md:px-8 md:py-10">
+        <Link href="/#kolleksiya" className="inline-flex min-h-11 items-center text-sm text-muted hover:text-primary">
           ← {d.back}
         </Link>
         <div className="mt-4 grid gap-8 md:grid-cols-2 md:gap-12">
           <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-ghost">
             <Image src={product.image} alt={product.alt[lang]} fill priority sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
           </div>
-          <div className="space-y-6 md:pt-4">
+          <div className="min-w-0 space-y-6 md:pt-4">
             <div className="space-y-2">
               <h1 className="font-display text-[26px] font-bold leading-8 tracking-[-0.015em] md:text-[32px] md:leading-10">
                 {product.title[lang]}

@@ -68,11 +68,11 @@ export function LeadCaptureForm({ d, placement, theme = "light", productId, prod
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="max-w-xl" aria-label={d.leadFormLabel}>
-      <label htmlFor={`lead-phone-${placement}`} className={`block text-xs font-semibold ${dark ? "text-white" : "text-primary"}`}>
+    <form onSubmit={onSubmit} noValidate className="w-full max-w-xl" aria-label={d.leadFormLabel}>
+      <label htmlFor={`lead-phone-${placement}`} className={`block text-sm font-semibold ${dark ? "text-white" : "text-primary"}`}>
         {d.phone}
       </label>
-      <div className="mt-2 flex flex-col gap-2 sm:flex-row">
+      <div className="mt-2 grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto]">
         <input
           ref={inputRef}
           id={`lead-phone-${placement}`}
@@ -80,19 +80,21 @@ export function LeadCaptureForm({ d, placement, theme = "light", productId, prod
           type="tel"
           inputMode="tel"
           autoComplete="tel"
+          enterKeyHint="send"
           spellCheck={false}
+          maxLength={24}
           value={phone}
           onChange={(event) => setPhone(event.target.value)}
           aria-invalid={Boolean(error)}
           aria-describedby={error ? `lead-phone-${placement}-error` : `lead-phone-${placement}-hint`}
-          className={`h-12 min-w-0 flex-1 rounded border px-4 text-base transition-colors ${
+          className={`h-14 w-full min-w-0 rounded-lg border px-4 text-[17px] transition-colors ${
             dark ? "border-white/25 bg-white text-primary" : "border-border-subtle bg-canvas text-primary"
           } ${error ? "border-error" : "focus-visible:border-primary"}`}
         />
         <button
           type="submit"
           disabled={status === "submitting"}
-          className={`h-12 shrink-0 rounded px-5 text-sm font-semibold transition-[background-color,transform] active:scale-[0.98] disabled:cursor-wait disabled:opacity-65 ${
+          className={`h-14 w-full shrink-0 rounded-lg px-6 text-base font-semibold transition-[background-color,transform] active:scale-[0.98] disabled:cursor-wait disabled:opacity-65 sm:w-auto ${
             dark ? "bg-secondary text-white hover:bg-secondary-container" : "bg-primary text-on-primary hover:bg-neutral"
           }`}
         >
@@ -100,11 +102,11 @@ export function LeadCaptureForm({ d, placement, theme = "light", productId, prod
         </button>
       </div>
       {error ? (
-        <p id={`lead-phone-${placement}-error`} role="alert" className={`mt-2 text-xs ${dark ? "text-rose-200" : "text-error"}`}>
+        <p id={`lead-phone-${placement}-error`} role="alert" className={`mt-2 text-sm ${dark ? "text-rose-200" : "text-error"}`}>
           {error}
         </p>
       ) : (
-        <p id={`lead-phone-${placement}-hint`} className={`mt-2 text-xs ${dark ? "text-white/65" : "text-muted"}`}>
+        <p id={`lead-phone-${placement}-hint`} className={`mt-2 text-sm leading-5 ${dark ? "text-white/70" : "text-muted"}`}>
           {d.leadPrivacy}
         </p>
       )}

@@ -1,13 +1,13 @@
 // Google Sheets qəbuledicisi. Cədvəldə Extensions → Apps Script, bu kodu yapışdırın,
 // Project Settings → Script properties-də SECRET əlavə edin (SHEETS_WEBHOOK_SECRET ilə eyni),
 // Deploy → New deployment → Web app, "Execute as: Me", "Who has access: Anyone".
-// "orders" və "events" vərəqləri yoxdursa, ilk sətirdə başlıqla yaradılır.
+// "leads" və "events" vərəqləri yoxdursa, ilk sətirdə başlıqla yaradılır.
 
 function doPost(e) {
   var body = JSON.parse(e.postData.contents);
   var secret = PropertiesService.getScriptProperties().getProperty("SECRET");
   if (!secret || body.secret !== secret) return json({ ok: false, error: "forbidden" });
-  if (body.sheet !== "orders" && body.sheet !== "events") return json({ ok: false, error: "sheet" });
+  if (body.sheet !== "leads" && body.sheet !== "events") return json({ ok: false, error: "sheet" });
 
   var lock = LockService.getScriptLock();
   lock.waitLock(10000);

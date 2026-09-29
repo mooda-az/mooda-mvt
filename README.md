@@ -1,43 +1,47 @@
 # mooda-mvt
 
-Mooda üçün Minimum Viable Test (MVT) səhifələri: landing, fake checkout və
-reklam variantları. **Atılacaq kod** — məhsul deyil.
+Mooda-nın əsas dəyər təklifini ölçən Minimum Viable Test səhifəsi: istifadəçi
+məhsulu sifariş edir, evdə yoxlayır və yalnız saxlamaq istədiyini alır. Xidmət
+hələ aktiv deyil; səhifə sifariş və ödəniş qəbul etmir.
+
+## Testin məqsədi
+
+Fərziyyə: Bakıda alıcılar “sifariş et → evdə yoxla → sonra qərar ver” təklifinə
+maraq göstərir və açılış xəbəri ilə ilk sifarişə 30% endirim qarşılığında mobil
+nömrəsini paylaşır.
+
+Əsas konversiya `lead_submitted`-dır. Məhsul kartları satış kataloqu deyil, dəyər
+təklifini konkretləşdirən nümunə kolleksiyadır. Qiymət, stok, satıcı təsdiqi,
+çatdırılma, checkout və ödəniş vədi verilmir.
+
+## Səhifələr və funnel
+
+- `/` — dəyər təklifi, mobil nömrə forması və nümunə kolleksiya.
+- `/p/[id]` — konkret məhsula marağı mobil nömrə ilə qeyd edir.
+- Funnel: `landing_view → lead_form_view → lead_submitted`.
+- Məhsul marağı: `product_card_clicked → product_view → lead_submitted`.
+- Uğursuz qeyd cəhdi: `lead_submit_failed`.
+
+Reklam linki `/?lang=az|ru&utm_source=…&utm_medium=…&utm_campaign=…` formasındadır.
+
+## Məlumatın çatdırılması
+
+Backend və verilənlər bazası yoxdur. Mobil nömrələr `SHEETS_WEBHOOK_URL` vasitəsilə
+Google Sheets-in `leads` vərəqinə və/və ya Telegram-a gedir; eventlər `events`
+vərəqinə yazılır. Konfiqurasiya üçün `.env.example` və `apps-script/Code.gs`-ə baxın.
+
+Heç bir kanal konfiqurasiya edilməyibsə, lokal inkişafda qeydlər server loguna
+yazılır. İstehsalda ən azı bir kanal konfiqurasiya edilməlidir.
 
 ## Qaydalar
 
-- Bu depo `fe-mooda-*` / `be-mooda-*` qaydalarına tabe deyil: hexagonal
-  arxitektura, persisted query, codegen, tam test matrisi tələb olunmur.
-- Heç bir kod buradan məhsul depolarına köçürülmür. Test qalib gələrsə,
-  funksiya məhsulda öz qaydaları ilə yenidən yazılır.
-- Backend və verilənlər bazası yoxdur. Sifariş/qeydiyyat məlumatı xarici
-  alətə (Sheets / Airtable / Telegram) gedir; icra concierge ilə, əl ilə.
-- Real ödəniş yalnız lisenziyalı bank/PSP ödəniş linki ilə. Kartdan-karta
-  köçürmə qəbul edilmir (`DEC-2026-004`).
-- Çek və qaimə satıcı butikdən olur, Mooda adından yox.
-
-## Fərziyyələr və nəticələr
-
-Fərziyyə, uğur meyarı (test başlamazdan **əvvəl**), nəticə və qərar
-`docs-mooda`-da saxlanılır, burada yox. Əlaqəli: `OPEN-014`, `OPEN-004`,
-`RISK-017`, `RISK-019`.
-
-| ID | Fərziyyə | Səhifə |
-| --- | --- | --- |
-| MVT-1 | Müştəri qapıda ödəniş olmadan kartla alar | `/`, `/p/[id]`, `/checkout` |
-| MVT-3 | Hansı dəyər təklifi (çeşid / qaytarma / sürət) cəlb edir | — |
-
-## MVT-1 necə işləyir
-
-- Reklam linki: `/?lang=az|ru&v=t|p&utm_source=…`. `v=t` etibar elementlərini
-  (VÖEN, qaytarma, butik adı) göstərir, `v=p` göstərmir; verilməyibsə 50/50.
-- Checkout-da iki seçim: «Kartla indi ödə» və «Qapıda ödə». Qapıda ödəniş
-  seçilərsə, «hələ aktiv deyil» dialoqu çıxır: karta keçid (`cod_to_card`)
-  və ya imtina + səbəb (`cod_declined`) ölçülür.
-- Sifariş `SHEETS_WEBHOOK_URL` (bax `apps-script/Code.gs`) və/və ya Telegram-a
-  gedir; eventlər Sheets-in `events` vərəqinə. Env: `.env.example`.
-- Məhsullar `src/lib/products.ts`-dədir; şəkillər Stitch maketindən
-  nümunədir — testdən əvvəl real butik məhsulları ilə əvəzlənir.
-- Dizayn: `docs-mooda/…/stitch/…/mooda_editorial_marketplace/DESIGN.md`.
+- Bu, atılacaq MVT kodudur; məhsul tətbiqinin arxitekturası deyil.
+- Nümunə şəkillər Stitch maketindəndir və hazırda satışda olan məhsul kimi təqdim
+  olunmur.
+- Real trafikdən əvvəl kampaniyanın 30% endirim şərtləri və əlaqə razılığı hüquqi
+  baxımdan təsdiqlənməlidir.
+- Fərziyyə, əvvəlcədən təyin edilmiş uğur meyarı, nəticə və qərar `docs-mooda`-da
+  saxlanılır.
 
 ## İşə salma
 
@@ -46,7 +50,4 @@ npm install
 npm run dev
 ```
 
-## Ömür
-
-Başlanğıc: 2026-09-29. Planlanan arxivləmə: 2026-11-30 — testlər bitəndə
-depo arxivlənir.
+Başlanğıc: 2026-09-29. Planlanan arxivləmə: 2026-11-30.

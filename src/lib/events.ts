@@ -1,16 +1,12 @@
-// MVT-1-in ölçdüyü eventlər. Funnel: landing_view → product_view →
-// checkout_view → payment_selected → (cod_prompt_shown → cod_to_card | cod_declined)
-// → order_submitted.
+// MVT funnel-i: landing_view → lead_form_view → lead_submitted.
+// Məhsul marağı ayrıca product_card_clicked → product_view ilə ölçülür.
 export const EVENT_NAMES = [
   "landing_view",
+  "product_card_clicked",
   "product_view",
-  "checkout_view",
-  "payment_selected",
-  "cod_prompt_shown",
-  "cod_to_card",
-  "cod_declined",
-  "order_submitted",
-  "payment_redirect",
+  "lead_form_view",
+  "lead_submitted",
+  "lead_submit_failed",
 ] as const;
 
 export type EventName = (typeof EVENT_NAMES)[number];

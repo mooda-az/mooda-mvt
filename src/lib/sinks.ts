@@ -1,11 +1,11 @@
 import "server-only";
 
-// Backend yoxdur: sifariş və eventlər Google Sheets-ə (Apps Script web app)
+// Backend yoxdur: erkən giriş qeydləri və eventlər Google Sheets-ə (Apps Script web app)
 // və/və ya Telegram-a gedir. Hansı env verilibsə, o işləyir.
 
 export type Row = Record<string, string | number | boolean | null>;
 
-async function toSheets(sheet: "orders" | "events", row: Row): Promise<void> {
+async function toSheets(sheet: "leads" | "events", row: Row): Promise<void> {
   const url = process.env.SHEETS_WEBHOOK_URL;
   if (!url) return;
   const res = await fetch(url, {
@@ -37,16 +37,21 @@ export function sinksConfigured(): boolean {
   );
 }
 
-// Sifariş itməməlidir: ən azı bir kanal uğurlu olmalıdır, əks halda xəta.
-export async function deliverOrder(row: Row, telegramText: string): Promise<void> {
+// Qeyd itməməlidir: ən azı bir kanal uğurlu olmalıdır, əks halda xəta.
+export async function deliverLead(row: Row, telegramText: string): Promise<void> {
   if (!sinksConfigured()) {
-    console.info("[mvt] order (sink yoxdur)", row);
+    console.info("[mvt] lead (sink yoxdur)", row);
     return;
   }
-  const results = await Promise.allSettled([toSheets("orders", row), toTelegram(telegramText)]);
+  const deliveries: Promise<void>[] = [];
+  if (process.env.SHEETS_WEBHOOK_URL) deliveries.push(toSheets("leads", row));
+  if (process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID) {
+    deliveries.push(toTelegram(telegramText));
+  }
+  const results = await Promise.allSettled(deliveries);
   const failures = results.filter((r): r is PromiseRejectedResult => r.status === "rejected");
-  failures.forEach((f) => console.error("[mvt] order sink xətası", f.reason));
-  if (failures.length === results.length) throw new Error("Heç bir sink sifarişi qəbul etmədi");
+  failures.forEach((f) => console.error("[mvt] lead sink xətası", f.reason));
+  if (failures.length === results.length) throw new Error("Heç bir sink qeydi qəbul etmədi");
 }
 
 // Event itkisi tolerans edilir — yalnız loglanır.

@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
   const body = (await request.json().catch(() => null)) as
     | { name?: unknown; productId?: unknown; detail?: unknown }
     | null;
-  if (!body || !isEventName(body.name) || body.name === "order_submitted") {
+  if (!body || !isEventName(body.name) || body.name === "lead_submitted") {
     return NextResponse.json({ error: "bad_request" }, { status: 400 });
   }
 
@@ -17,7 +17,6 @@ export async function POST(request: NextRequest) {
     name: body.name,
     session: ctx.session,
     lang: ctx.lang,
-    variant: ctx.variant,
     source: ctx.source,
     productId: typeof body.productId === "string" ? body.productId.slice(0, 64) : "",
     detail: typeof body.detail === "string" ? body.detail.slice(0, 200) : "",

@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { COOKIE, parseLang, parseVariant } from "./lib/context";
+import { COOKIE, parseLang } from "./lib/context";
 
 const MAX_AGE = 60 * 60 * 24 * 30;
 
@@ -9,12 +9,6 @@ export function proxy(request: NextRequest) {
 
   const lang = parseLang(searchParams.get("lang"));
   if (lang) updates.set(COOKIE.lang, lang);
-
-  // Variant reklam linkində (?v=t|p) verilir; verilməyibsə 50/50 təyin olunur
-  // və sonrakı girişlərdə dəyişmir.
-  const variant = parseVariant(searchParams.get("v"));
-  if (variant) updates.set(COOKIE.variant, variant);
-  else if (!request.cookies.has(COOKIE.variant)) updates.set(COOKIE.variant, Math.random() < 0.5 ? "t" : "p");
 
   if (!request.cookies.has(COOKIE.session)) updates.set(COOKIE.session, crypto.randomUUID());
 

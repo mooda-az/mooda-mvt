@@ -5,6 +5,7 @@
   --color-primary: #09090b;
   --color-on-primary: #ffffff;
   --color-secondary: #e11d48;
+  --color-secondary-container: #be123c;
   --color-secondary-glaze: #fff1f2;
   --color-tertiary: #2563eb;
   --color-neutral: #18181b;
@@ -14,8 +15,8 @@
   --color-muted: #71717a;
   --color-ghost: #f4f4f5;
   --color-gold: #d97706;
-  --color-trust: #059669;
-  --color-trust-glaze: #ecfdf5;
+  --color-success: #047857;
+  --color-success-glaze: #ecfdf5;
   --color-error: #ba1a1a;
 
   --font-display: var(--font-jakarta), system-ui, sans-serif;
@@ -33,6 +34,42 @@ body {
   background: var(--color-sand);
   color: var(--color-primary);
   font-family: var(--font-sans);
+}
+
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 3px;
+}
+
+:where(a, button, summary) {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(225, 29, 72, 0.14);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes hero-slide-in {
+  from {
+    opacity: 0.5;
+    transform: scale(1.015);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hero-slide-in {
+  animation: hero-slide-in 500ms ease-out;
 }
 
 .tabular {

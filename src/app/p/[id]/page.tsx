@@ -43,7 +43,6 @@ export default async function ProductPage({ params }: PageProps<"/p/[id]">) {
               d={d}
               placement="product"
               productId={product.id}
-              productTitle={product.title[lang]}
             />
           </div>
         </div>

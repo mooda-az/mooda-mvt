@@ -10,10 +10,9 @@ type Props = {
   placement: "hero" | "product";
   theme?: "dark" | "light";
   productId?: string;
-  productTitle?: string;
 };
 
-export function LeadCaptureForm({ d, placement, theme = "light", productId, productTitle }: Props) {
+export function LeadCaptureForm({ d, placement, theme = "light", productId }: Props) {
   const [phone, setPhone] = useState("+994 ");
   const [error, setError] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
@@ -41,7 +40,7 @@ export function LeadCaptureForm({ d, placement, theme = "light", productId, prod
       const response = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: normalized, placement, productId, productTitle }),
+        body: JSON.stringify({ phone: normalized, placement, productId }),
       });
       if (!response.ok) throw new Error(String(response.status));
       setStatus("success");

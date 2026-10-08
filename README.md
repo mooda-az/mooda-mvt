@@ -24,14 +24,33 @@ təklifini konkretləşdirən nümunə kolleksiyadır. Qiymət, stok, satıcı t
 
 Reklam linki `/?lang=az|ru&utm_source=…&utm_medium=…&utm_campaign=…` formasındadır.
 
-## Məlumatın çatdırılması
+## Məlumatın saxlanması
 
-Backend və verilənlər bazası yoxdur. Mobil nömrələr `SHEETS_WEBHOOK_URL` vasitəsilə
-Google Sheets-in `leads` vərəqinə və/və ya Telegram-a gedir; eventlər `events`
-vərəqinə yazılır. Konfiqurasiya üçün `.env.example` və `apps-script/Code.gs`-ə baxın.
+Mobil nömrələr və eventlər yalnız Supabase Postgres-ə yazılır (`private.leads`,
+`private.events`). Google Sheets və Telegram istifadə edilmir.
 
-Heç bir kanal konfiqurasiya edilməyibsə, lokal inkişafda qeydlər server loguna
-yazılır. İstehsalda ən azı bir kanal konfiqurasiya edilməlidir.
+- `private` sxemi Data API-yə açıq deyil; REST/GraphQL və `anon` açarı bu cədvəlləri görmür.
+- Tətbiq yalnız `mvt_writer` rolu ilə qoşulur: INSERT edə bilir, oxuya, dəyişə, silə bilmir.
+  Bu bağlantı sızsa belə, nömrələr oxunmur.
+- Nömrələrə Supabase Table Editor-də (schema: `private`) baxılır. Layihə üzvləri MFA ilə
+  daxil olur, üzv sayı minimum saxlanılır.
+- Eyni nömrə eyni məhsul (və ya ümumi forma) üçün bir dəfə yazılır.
+
+`DATABASE_URL` boşdursa (lokal inkişaf), qeydlər nömrə maskalanaraq server loguna yazılır.
+İstehsalda `DATABASE_URL` mütləq doldurulmalıdır.
+
+### Supabase quraşdırması
+
+1. Layihəni AB regionunda yaradın. Data API: söndürülü; "Automatically expose new tables":
+   söndürülü; "Enable automatic RLS": açıq.
+2. SQL Editor-də `supabase/schema.sql`-i işlədin.
+3. SQL Editor-də rola güclü şifrə verin (şifrə repoya yazılmır):
+   `alter role mvt_writer with password '<şifrə>';`
+4. Connect → Transaction pooler bağlantısını götürün, istifadəçini `mvt_writer.<project-ref>`,
+   şifrəni 3-cü addımdakı ilə əvəz edin və `DATABASE_URL`-ə yazın (lokal stack-də
+   `mooda-local-runnable-env/.env` → `MOODA_MVT_DATABASE_URL`).
+5. Settings → Database-də "Enforce SSL" açıq olsun.
+6. MVT bitdikdən sonra (2026-11-30) nömrələr silinir və ya razılaşdırılmış sistemə köçürülür.
 
 ## Qaydalar
 

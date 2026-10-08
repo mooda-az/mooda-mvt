@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { isEventName } from "@/lib/events";
 import { requestContext } from "@/lib/request-context";
-import { deliverEvent } from "@/lib/sinks";
+import { saveEvent } from "@/lib/store";
 
 export async function POST(request: NextRequest) {
   const body = (await request.json().catch(() => null)) as
@@ -12,8 +12,7 @@ export async function POST(request: NextRequest) {
   }
 
   const ctx = requestContext(request);
-  await deliverEvent({
-    createdAt: new Date().toISOString(),
+  await saveEvent({
     name: body.name,
     session: ctx.session,
     lang: ctx.lang,

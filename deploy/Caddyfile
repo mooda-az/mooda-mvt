@@ -1,0 +1,6 @@
+# Sertifikanı Caddy Let's Encrypt-dən HTTP-01 ilə alır və yeniləyir.
+# Cloudflare proxy açıq olanda SSL rejimi Full (strict) olmalıdır.
+mvt.mooda.az {
+	encode zstd gzip
+	reverse_proxy mvt:3200
+}

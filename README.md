@@ -69,4 +69,58 @@ npm install
 npm run dev
 ```
 
+## Yayım: mvt.mooda.az
+
+Sayt ayrıca Hetzner Cloud serverində işləyir (OpenCrop serverindən ayrı). Kod `deploy/`-dadır.
+
+### İnfrastruktur
+
+| Nə | Dəyər |
+|---|---|
+| Server | Hetzner `mooda-preprod` layihəsi, `ubuntu-4gb-hel1-2` (CAX11, ARM64, 2 vCPU, 4 GB, Helsinki) |
+| IP | `37.27.158.134` / `2a01:4f9:c015:5475::/64` |
+| SSH | `ssh mooda-mvt-1` (root, `~/.ssh/id_ed25519_hetzner`) |
+| Firewall | Hetzner `mooda-mvt-fw`: daxilə yalnız TCP 22, 80, 443 və ICMP |
+| DNS | Hetzner DNS zonası `mooda.az`; `A mvt → 37.27.158.134` |
+| Domen qeydiyyatı | online.az → "DNS server": `hydrogen.ns.hetzner.com`, `oxygen.ns.hetzner.com`, `helium.ns.hetzner.de` (əl ilə qeyd olunur; yayılması 4–24 saat) |
+| HTTPS | Caddy, Let's Encrypt (HTTP-01), avtomatik yenilənir |
+
+### Serverdə edilənlər (2026-10-08)
+
+- Paketlər yeniləndi, yeni kernel ilə yenidən başladıldı.
+- Docker (`docker.io`) və Compose v2 quruldu; konteyner logları 10 MB × 3 ilə məhdudlaşdırıldı.
+- 2 GB swap (`/swapfile`, `vm.swappiness=10`).
+- `unattended-upgrades` ilə avtomatik təhlükəsizlik yeniləmələri.
+- SSH: şifrə ilə giriş bağlıdır, root yalnız açarla (`/etc/ssh/sshd_config.d/00-mooda.conf`).
+- `/opt/mooda-mvt/`: `compose.yaml`, `Caddyfile` və `.env` (yalnız `DATABASE_URL`, `chmod 600`).
+
+### Konteynerlər
+
+- `mvt`: Next.js (`mvt.Dockerfile`, `linux/arm64`), port 3200 yalnız daxili şəbəkədə, 768 MB limit.
+- `caddy`: 80/443 (443/udp HTTP/3), `mvt:3200`-ə reverse proxy, 128 MB limit.
+
+Image registry yoxdur: `deploy/deploy.sh` image-i Mac-də qurur və `docker save | ssh docker load` ilə göndərir.
+
+### Yeniləmə
+
+```bash
+deploy/deploy.sh                       # qur, göndər, compose up
+ssh mooda-mvt-1 'cd /opt/mooda-mvt && docker compose logs -f --tail 50'
+```
+
+`DATABASE_URL` dəyişəndə serverdəki `/opt/mooda-mvt/.env`-i yeniləyin və
+`docker compose up -d mvt` işlədin. Dəyəri repoya və ya çata yazmayın.
+
+### Bağlama (MVT bitəndə)
+
+`ssh mooda-mvt-1 'cd /opt/mooda-mvt && docker compose down -v'`, sonra Hetzner-də serveri,
+`mooda-mvt-fw`-ni və lazım deyilsə `mooda.az` DNS zonasını silin.
+
+### Açıq məsələlər
+
+- Supabase layihəsi `ap-southeast-1` (Sinqapur) regionundadır; server Helsinkidədir. AB
+  regionuna köçürmə hüquqi təsdiq və gecikmə baxımından tövsiyə olunur.
+- Cloudflare (proxy, rate limit) qoşulmayıb: `.az` domeni nameserver olmadan Cloudflare-in
+  domen yoxlamasından keçmədi. Delegasiya işə düşəndən sonra yenidən cəhd edilə bilər.
+
 Başlanğıc: 2026-09-29. Planlanan arxivləmə: 2026-11-30.

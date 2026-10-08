@@ -1,0 +1,28 @@
+# mooda-mvt — mvt.mooda.az, tək Hetzner serveri (mooda-mvt-1, ARM64).
+# Serverdə /opt/mooda-mvt-də durur; image deploy.sh ilə Mac-dən göndərilir (registry yoxdur).
+# DATABASE_URL /opt/mooda-mvt/.env-dədir (chmod 600), repoya düşmür.
+
+services:
+  mvt:
+    image: mooda/mooda-mvt:prod
+    env_file: .env
+    environment:
+      PORT: "3200"
+    restart: unless-stopped
+    mem_limit: 768m
+    expose: ["3200"]
+
+  caddy:
+    image: caddy:2.10.2-alpine
+    restart: unless-stopped
+    mem_limit: 128m
+    ports: ["80:80", "443:443", "443:443/udp"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on: [mvt]
+
+volumes:
+  caddy_data:
+  caddy_config:

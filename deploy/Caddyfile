@@ -4,3 +4,8 @@ mvt.mooda.az {
 	encode zstd gzip
 	reverse_proxy mvt:3200
 }
+
+# www.mvt.mooda.az-ın öz sertifikatı var və hər sorğunu əsas ünvana 301 ilə yönləndirir.
+www.mvt.mooda.az {
+	redir https://mvt.mooda.az{uri} permanent
+}

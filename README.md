@@ -81,9 +81,9 @@ Sayt ayrıca Hetzner Cloud serverində işləyir (OpenCrop serverindən ayrı). 
 | IP | `37.27.158.134` / `2a01:4f9:c015:5475::/64` |
 | SSH | `ssh mooda-mvt-1` (root, `~/.ssh/id_ed25519_hetzner`) |
 | Firewall | Hetzner `mooda-mvt-fw`: daxilə yalnız TCP 22, 80, 443 və ICMP |
-| DNS | Hetzner DNS zonası `mooda.az`; `A mvt → 37.27.158.134` |
+| DNS | Hetzner DNS zonası `mooda.az`; `A mvt` və `A www.mvt` → `37.27.158.134` |
 | Domen qeydiyyatı | online.az → "DNS server": `hydrogen.ns.hetzner.com`, `oxygen.ns.hetzner.com`, `helium.ns.hetzner.de` (əl ilə qeyd olunur; yayılması 4–24 saat) |
-| HTTPS | Caddy, Let's Encrypt (HTTP-01), avtomatik yenilənir |
+| HTTPS | Caddy, Let's Encrypt (HTTP-01), avtomatik yenilənir; `www.mvt.mooda.az` → `mvt.mooda.az` (301) |
 
 ### Serverdə edilənlər (2026-10-08)
 

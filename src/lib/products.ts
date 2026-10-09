@@ -31,9 +31,9 @@ export const products: Product[] = [
   },
   {
     id: "canta-qara",
-    title: { az: "Qapitone dəri çanta", ru: "Стёганая кожаная сумка" },
-    image: IMG + "AB6AXuBgUQG1-ghkJSO6DkeNuxP8UjXcxQAkkDlbm_DRwHOGnXqmZJot2MEmr2v4SBOT1e7-Dzbd22fVUvXAr2N5Q3AgM70yH3q1lxz4MGtv1iwnjj1xDr8QoglwlXiUsfgwP1u5ry521pL-JFlPa5Ljevq5HkhpC2BuqNEJURC6W6m7x_cYEdbeJpAwzaLdzqoSb9fjxW6IKFAs5pry2odGNYEJSQwe73dCQYAoqdQ4AOXh1sHTJb8dKpI_",
-    alt: { az: "Qızıl tokalı qara qapitone dəri çanta", ru: "Чёрная стёганая кожаная сумка с золотой застёжкой" },
+    title: { az: "Qızıl tokalı dəri çanta", ru: "Кожаная сумка с золотой застёжкой" },
+    image: IMG + "AB6AXuCM0q3401h3JWZzpVf8-Kz-XhMHDvEpH9bmMDaOhw7W0yE4rfSx4FtJIEBsPFluEWasfko7eHZvQXFTun17n5ue-px08VxbV5qF5J6gq0KT6GAGEm8PWxQb8XCJjONJsiPG9j4ahyXio2IA-GUQQqezVpkPqfxps3bcISNhNeZaHhs1SEeOFwXUU0ZeZt1HBe7vZEIW9iO7gNMFwyokiA46rjYvmPdo_sKolv5qdP2heV4dyaPYaetJ2Q",
+    alt: { az: "Qızıl tokalı qara hamar dəri çiyin çantası", ru: "Чёрная гладкая кожаная сумка через плечо с золотой застёжкой" },
   },
   {
     id: "don-ipek",

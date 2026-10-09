@@ -15,13 +15,14 @@ export function SiteHeader({ lang }: { lang: Lang }) {
           <Link href="/" aria-label={d.homeLabel} className="rounded-sm">
             <Logo className="text-[28px]" />
           </Link>
-          <Link
+          {/* Adi <a>: Link prefetch etsəydi, proxy dil seçimini istifadəçi klikləmədən yazardı. */}
+          <a
             href={`?lang=${lang === "az" ? "ru" : "az"}`}
             className="flex h-11 min-w-11 items-center justify-center rounded-full border border-border-subtle px-3 text-xs font-semibold tracking-[0.02em] transition-colors hover:border-primary hover:bg-ghost"
             aria-label={lang === "az" ? "Русский язык" : "Azərbaycan dili"}
           >
             {d.langSwitch}
-          </Link>
+          </a>
         </div>
       </div>
     </header>

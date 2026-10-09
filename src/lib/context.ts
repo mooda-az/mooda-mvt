@@ -4,7 +4,8 @@
 export type Lang = "az" | "ru";
 
 export const COOKIE = {
-  lang: "mvt_lang",
+  // Ad dəyişib: köhnə `mvt_lang` prefetch xətası ilə 30 günlük `ru` yazırdı, oxunmur.
+  lang: "mvt_lang_s",
   source: "mvt_src",
   session: "mvt_sid",
 } as const;

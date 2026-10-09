@@ -1,18 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { LeadCaptureForm } from "@/components/LeadCaptureForm";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TrackView } from "@/components/TrackView";
 import { t } from "@/lib/i18n";
-import { findProduct } from "@/lib/products";
+import { findProduct, isRetiredProduct } from "@/lib/products";
 import { getContext } from "@/lib/server-context";
 
 export default async function ProductPage({ params }: PageProps<"/p/[id]">) {
   const { id } = await params;
   const product = findProduct(id);
-  if (!product) notFound();
+  if (!product) {
+    if (isRetiredProduct(id)) permanentRedirect("/#kolleksiya");
+    notFound();
+  }
 
   const { lang } = await getContext();
   const d = t(lang);

@@ -55,8 +55,11 @@ Mobil nömrələr və eventlər yalnız Supabase Postgres-ə yazılır (`private
 ## Qaydalar
 
 - Bu, atılacaq MVT kodudur; məhsul tətbiqinin arxitekturası deyil.
-- Nümunə şəkillər Stitch maketindəndir və hazırda satışda olan məhsul kimi təqdim
-  olunmur.
+- Nümunə kolleksiya (12 kart) Azərbaycan bazarı araşdırmasına görə seçilib: qadın geyimi və
+  idman ayaqqabısı önə, sonra tişört, cins, trikotaj; kostyum və polo zəif tələbdir. Şəkillər
+  Unsplash-dandır, `public/products/`-da 1500×2000 WebP kimi saxlanılır; mənbələr
+  `public/products/CREDITS.md`-dədir. Brend loqosu görünən şəkil qoyulmur. Məhsullar satışda
+  olan məhsul kimi təqdim olunmur.
 - Real trafikdən əvvəl kampaniyanın 30% endirim şərtləri və əlaqə razılığı hüquqi
   baxımdan təsdiqlənməlidir.
 - Fərziyyə, əvvəlcədən təyin edilmiş uğur meyarı, nəticə və qərar `docs-mooda`-da

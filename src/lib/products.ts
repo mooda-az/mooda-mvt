@@ -13,9 +13,9 @@ const IMG = "https://lh3.googleusercontent.com/aida-public/";
 export const products: Product[] = [
   {
     id: "trench-bej",
-    title: { az: "Kətan qarışıqlı klassik trençkot", ru: "Классический тренч из льна" },
-    image: IMG + "AB6AXuA7zU_22fVCCYstT0QzfXYuOVJvG5ElR7GRTV6e2E1hUCYOPypALLqHQH66nZXz3JBST24htk9vcgpjK9k3c4qr10BnShiH_Ob38E1MJ7Oq1TRNW3JCrpGm_fvKHqOb-vAmZcI1_SVxs0dzapagAkrgZH3Iwo7UXpUINBD9m4zDnf01EnuhN8Xt8MsLka7kXB2KnK0k3GxlTjysYQC6e1WmF4rUFj_F4iNK3t6l65h_xTB1Q9_h1f4e",
-    alt: { az: "Bej rəngli oversize trençkot", ru: "Бежевый тренч свободного кроя" },
+    title: { az: "Klassik ikidüyməli trençkot", ru: "Классический двубортный тренч" },
+    image: IMG + "AB6AXuDhlqOop07UoMWXHdMu7eSd35M7qorm-AA3OQWN3Q-M3KoJSZAAfPwB_xLAhUTTOcIpRjQV6EvLgEaAApN6PtrdWWAHaGjxLHZ0BJrorWYmfBu5_qSTrh9NE5qxbnVgGFBlTuVJ8bmQUiweW6o_G3k4bQtCGuqDLLwmorVFYZPHsVjLmcYSUH1gxtJagMS5niIHWFHoDrfVCplzYkaM1nPLvng4S-TK-tBBEsLT0rScF8XRdUYJH7qIZg",
+    alt: { az: "Kəmərli bej ikidüyməli trençkot", ru: "Бежевый двубортный тренч с поясом" },
   },
   {
     id: "botilyon-qara",
@@ -26,8 +26,8 @@ export const products: Product[] = [
   {
     id: "pencek-boz",
     title: { az: "Yun slim-fit pencək", ru: "Шерстяной пиджак slim-fit" },
-    image: IMG + "AB6AXuBa5j_UCjDuinKSyOo7P50EMiHm0uinol-JhWbqOu0tcKCFS0Fd3MgudVK7t73zJsN4t7bAaVIn0xva3mx_T5tzl9QjU8J6QqvHR9tNK04Py4T3JcxDLIFVUledvhvm88amqEgFR259vMPrB35Su1xv4vOXGyCBty1uF-zgYs7Ie98ObhzjAB6XA0r5nltEC_8L2AvsIOUcQGHOVSPx1-N7KInqh1Md2uWBGmadkf5XJ8EMtLnn2lTz",
-    alt: { az: "Tünd boz yun kişi pencəyi", ru: "Мужской шерстяной пиджак тёмно-серого цвета" },
+    image: IMG + "AB6AXuASz5MrfIunRKw5pOQNFvZ8x8DS8Iv-9M4uFLvVFo1r-bJ11HRCpvqNl_IeOd9O-hK5C3yyvVKaVShF1NkHMGIUxV-OylraXYa_YPz9gL-wIpd-9zOJVV-HVNHvVIEOO8df3zCdHzVaut1A9Cil8VLBF5pwD2s7uUBEiVoM82g8K1ZjDwF7WVoaZK01dlpJAr1be0l0OvLbNl1RUmHN4rAhnzWv5R-AZ_B8i7XfqfJkkA58ysnyOS6X-Q",
+    alt: { az: "Tünd boz yun qadın pencəyi", ru: "Женский шерстяной пиджак тёмно-серого цвета" },
   },
   {
     id: "canta-qara",
@@ -37,9 +37,9 @@ export const products: Product[] = [
   },
   {
     id: "don-ipek",
-    title: { az: "Kəsik detallı ipək don", ru: "Шёлковое платье-комбинация" },
-    image: IMG + "AB6AXuDMlsu7ew0PiukdqohE4oHNBfTirb-tRwrfPq1vH4pHXLdI1BA5VfF-T2dallOEMa9dAdfA6nLVjnL-gFrxLeWnAUTuB0Qka_GkmzzoQOMzj2xgiTIXZ4cOGtRoL0ShAEHzSBnhKeE-fITRcpJfqtetEjAOiKeF1GXkkBCF4ZYr_a80Xw6ylzVNcbc154ln-u-jp9T21bVvEsRd4Z2jugq6SZGiAVhh6kwiqSmWjvDTrugKlkdL_L8Z",
-    alt: { az: "Fil sümüyü rəngli atlas midi don", ru: "Атласное платье миди цвета слоновой кости" },
+    title: { az: "İpək askılı don", ru: "Шёлковое платье-комбинация" },
+    image: IMG + "AB6AXuBuVjxbUUO2cqAHjDxHnLVg8fkcXX52CIs8XbJdjPxWsnTVl_J3cVR2evIrYYCuSSmEgkc4TCa424qNJNrIr2-C9k78467CWXitgY07z7Jf0Q7LdeOF3c6RqwTOCeHyEtlP6Nx38O1n4rQgPXl6TuOIZez6kiXKlUGSe0S99HfRNo3sHzqBYbWjd7hWtLhbYr6Yx7D87WOC4N4w0j2sb2cuPo4NgkbhH4TT45GioTULMdOw1xT3CUL5",
+    alt: { az: "Asılqanda fil sümüyü rəngli ipək don", ru: "Шёлковое платье цвета слоновой кости на вешалке" },
   },
   {
     id: "pencek-qara",
